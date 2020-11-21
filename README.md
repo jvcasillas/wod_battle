@@ -295,6 +295,8 @@ Kelly
 
 <img src="README_files/figure-gfm/points-by-event-1.png" width="100%" />
 
+<img src="README_files/figure-gfm/event-points-1.png" width="100%" />
+
 <img src="README_files/figure-gfm/final-podium-1.png" width="100%" />
 
 <img src="README_files/figure-gfm/individual-wods-1.png" width="100%" />

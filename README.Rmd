@@ -5,7 +5,7 @@ always_allow_html: true
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.retina = 2, 
-                      out.width = "100%")
+                      out.width = "100%", fig.height = 4)
 ```
 
 ```{r, load-packages}
@@ -126,31 +126,34 @@ overall_events %>%
     my_minimal()
 ```
 
-```{r, event-points, eval=F}
+```{r, event-points}
 overall_events %>% 
-  ggplot(., aes(x = Event, y = Score, color = Athlete)) + 
-  geom_point() + 
-  geom_path(aes(group = Athlete)) + 
+  ggplot(., aes(x = Event, y = Score, fill = Athlete)) + 
+  geom_path(aes(group = Athlete, color = Athlete)) + 
+  geom_point(stroke = 1, color = "white", pch = 21, size = 4) + 
   scale_x_continuous(breaks = seq(1, max(standings$Event), 1)) + 
-  labs(y = "Overall points", x = "WOD", title = "Overall points by event")
+  scale_y_continuous(breaks = 1:3) + 
+  labs(y = "Place", x = "WOD", title = "Placing by event") + 
+  my_minimal()
 ```
 
 
 ```{r, final-podium}
 # Plot Podium
 overall %>% 
-  ggplot(., aes(x = Overall, y = Athlete)) + 
-    geom_bar(stat = "identity", width = 0.15) + 
-    geom_point() + 
+  ggplot(., aes(x = Overall, y = Athlete, fill = Athlete)) + 
+    geom_bar(stat = "identity", width = 0.15, show.legend = F) + 
+    geom_point(show.legend = F) + 
     geom_image(aes(image = image), size = .15) + 
-    coord_cartesian(xlim = c(0.5, max(overall$Overall) + 1)) + 
+    coord_cartesian(xlim = c(0.5, max(overall$Overall) + 5)) + 
     labs(title = "Overall standings", caption = "Most points loses.", 
-         x = "Cumulative points")
+         x = "Cumulative points") + 
+    my_minimal()
 ```
 
 
 
-```{r, individual-wods}
+```{r, individual-wods, fig.height = 8}
 # Events
 
 # WOD 1
@@ -160,7 +163,8 @@ w1 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(400, 800)) + 
-    labs(title = "Results - WOD 1", y = "Time (seconds)")
+    labs(title = "Results - WOD 1", y = "Time (seconds)") + 
+    my_minimal()
 
 # WOD 2
 w2 <- standings %>% 
@@ -169,7 +173,8 @@ w2 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(0.3, 0.4)) + 
-    labs(title = "Results - WOD 2", y = "Strength ratio")
+    labs(title = "Results - WOD 2", y = "Strength ratio") + 
+    my_minimal()
 
 # WOD 3
 w3 <- standings %>% 
@@ -178,7 +183,8 @@ w3 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(130, 220)) + 
-    labs(title = "Results - WOD 3", y = "Total reps")
+    labs(title = "Results - WOD 3", y = "Total reps") + 
+    my_minimal()
 
 # WOD 4
 w4 <- standings %>% 
@@ -187,7 +193,8 @@ w4 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(0.55, 0.75)) + 
-    labs(title = "Results - WOD 4", y = "Strength ratio")
+    labs(title = "Results - WOD 4", y = "Strength ratio") + 
+    my_minimal()
 
 # WOD 5
 w5 <- standings %>% 
@@ -196,7 +203,8 @@ w5 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(0, 20)) + 
-    labs(title = "Results - WOD 5", y = "Total rounds")
+    labs(title = "Results - WOD 5", y = "Total rounds") + 
+    my_minimal()
 
 # WOD 6
 w6 <- standings %>% 
@@ -205,7 +213,8 @@ w6 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(70, 120)) + 
-    labs(title = "Results - WOD 6", y = "Total reps")
+    labs(title = "Results - WOD 6", y = "Total reps") + 
+    my_minimal()
 
 # WOD 7
 w7 <- standings %>% 
@@ -214,7 +223,8 @@ w7 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(10, 15)) + 
-    labs(title = "Results - WOD 7", y = "Total rounds")
+    labs(title = "Results - WOD 7", y = "Total rounds") + 
+    my_minimal()
 
 # WOD 8
 w8 <- standings %>% 
@@ -223,7 +233,8 @@ w8 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(0.3, 0.50)) + 
-    labs(title = "Results - WOD 8", y = "Strength ratio")
+    labs(title = "Results - WOD 8", y = "Strength ratio") + 
+    my_minimal()
 
 # WOD 9
 w9 <- standings %>% 
@@ -232,7 +243,8 @@ w9 <- standings %>%
     geom_point() + 
     geom_image(aes(image = image), size = .15) + 
     coord_cartesian(ylim = c(150, 350)) + 
-    labs(title = "Results - WOD 9", y = "Time (seconds)")
+    labs(title = "Results - WOD 9", y = "Time (seconds)") + 
+    my_minimal()
 
 
 (w1 | w2 | w3) / (w4 | w5 | w6) / (w7 | w8 | w9)
@@ -259,11 +271,10 @@ wt_plot_1 <- standings %>%
     geom_abline(intercept = 0, slope = 1, lty = 3) + 
     geom_smooth(method = lm, se = F, color = "black", size = 0.5) +
     geom_point(aes(fill = Notes, color = Notes, shape = Athlete), size = 3) + 
-    scale_fill_viridis_d(option = "A", begin = 0.3, end = 0.85) + 
-    scale_color_viridis_d(option = "A", begin = 0.3, end = 0.85) + 
     scale_shape_manual(values = 21:23) + 
     labs(y = "\nStrength\n(bodyweight, height)", x = "Strength \n(bodyweight)\n") + 
-    theme_classic()  
+    my_minimal() + 
+    theme_classic(base_size = 12, base_family = "Times")  
 
 wt_plot_2 <- standings %>% 
   filter(WOD == "strength") %>% 
@@ -283,10 +294,9 @@ wt_plot_2 <- standings %>%
     scale_x_discrete(
       labels = c("Strength\n(bodyweight)", "Strength\n(bodyweight/height)")) + 
     scale_shape_manual(values = 21:23) + 
-    scale_fill_viridis_d(option = "A", begin = 0.3, end = 0.85) + 
-    scale_color_viridis_d(option = "A", begin = 0.3, end = 0.85) + 
     labs(y = "\nStrength (std.)", x = "Metric\n") + 
-    theme_classic()
+    my_minimal() + 
+    theme_classic(base_size = 12, base_family = "Times")  
 
 wt_plot_1 + wt_plot_2
 ```

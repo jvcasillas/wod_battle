@@ -1,5 +1,7 @@
 
-<table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
+## Overall rankings
+
+<table class="table" style="font-size: 10px; margin-left: auto; margin-right: auto;">
 
 <thead>
 

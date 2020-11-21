@@ -1,5 +1,6 @@
 ---
 output: github_document
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -92,7 +93,8 @@ overall_events %>%
   pivot_wider(id_cols = c("Athlete"), names_from = Event, values_from = Score) %>% 
   rowwise() %>% 
   mutate(Overall = sum(c_across(WOD1:WOD9))) %>% 
-  knitr::kable(format = "pandoc")
+  knitr::kable(format = "html") %>% 
+  kableExtra::kable_styling(font_size = 12)
 ```
 
 ```{r, points-by-event}

@@ -3,7 +3,7 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=F, warning=F, fig.retina=2, 
+knitr::opts_chunk$set(echo = F, message = F, warning = F, fig.retina = 2, 
                       out.width = "100%")
 ```
 
@@ -88,9 +88,10 @@ overall_events <- standings %>%
 ```{r, table-rankings}
 overall_events %>% 
   select(-image) %>% 
+  mutate(Event = stringr::str_glue("WOD{Event}")) %>% 
   pivot_wider(id_cols = c("Athlete"), names_from = Event, values_from = Score) %>% 
   rowwise() %>% 
-  mutate(Overall = sum(c_across(`1`:`9`))) %>% 
+  mutate(Overall = sum(c_across(WOD1:WOD9))) %>% 
   knitr::kable(format = "pandoc")
 ```
 
